@@ -1,0 +1,36 @@
+/* Player controls styles */
+.player-controls {
+    display: flex;
+    align-items: center;
+}
+
+.play-pause {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 1.2em;
+    transition: transform 0.2s;
+}
+
+.play-pause:hover {
+    transform: scale(1.1);
+}
+
+.play-pause:active {
+    transform: scale(0.95);
+}
+
+.play-pause[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.play-pause:not([disabled]):hover {
+    transform: scale(1.1);
+}
+
+.play-pause:not([disabled]):active {
+    transform: scale(0.95);
+} 

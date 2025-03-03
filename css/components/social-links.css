@@ -1,0 +1,53 @@
+/* Social links styles */
+@import 'social-links/container.css';
+@import 'social-links/icons.css';
+@import 'social-links/main-icon.css';
+
+.social-links {
+    margin-top: 30px;
+    z-index: 1;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.social-links a {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    width: 48px;
+    height: 48px;
+}
+
+.social-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: black;
+    padding: 8px;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+    transition: all 0.3s ease;
+    object-fit: contain;
+}
+
+.social-links a:hover {
+    transform: scale(1.1);
+}
+
+.social-links a:hover .social-icon {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8));
+}
+
+.main-icon {
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.main-icon:hover {
+    transform: scale(1.02);
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.7));
+} 

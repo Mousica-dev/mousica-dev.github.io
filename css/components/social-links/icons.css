@@ -1,0 +1,27 @@
+/* Social icons styles */
+.social-links a {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    width: 48px;
+    height: 48px;
+}
+
+.social-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: black;
+    padding: 8px;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+    transition: all 0.3s ease;
+    object-fit: contain;
+}
+
+.social-links a:hover {
+    transform: scale(1.1);
+}
+
+.social-links a:hover .social-icon {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8));
+} 

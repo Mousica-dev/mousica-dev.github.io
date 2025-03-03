@@ -1,0 +1,109 @@
+/* Space objects styles */
+@import 'space-objects/base.css';
+@import 'space-objects/planets.css';
+@import 'space-objects/animations.css';
+
+.space-object {
+    position: fixed;
+    border-radius: 50%;
+    z-index: -1;
+    transition: opacity 1.5s ease;
+    will-change: transform;
+}
+
+.space-object.fade-out {
+    opacity: 0.1;
+}
+
+.sun {
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle at 30% 30%, #FFD700, #FFA500);
+    box-shadow: 0 0 60px #ffd700;
+    animation: glow 4s ease-in-out infinite;
+}
+
+.earth {
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle at 30% 30%, #4B9CD3, #13294B);
+    box-shadow: 0 0 20px rgba(75, 156, 211, 0.6);
+    animation: orbit var(--orbit-duration) linear infinite;
+}
+
+.mars {
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(circle at 30% 30%, #FF6B6B, #A52A2A);
+    box-shadow: 0 0 18px rgba(255, 107, 107, 0.6);
+    animation: orbit var(--orbit-duration) linear infinite;
+}
+
+.jupiter {
+    width: 45px;
+    height: 45px;
+    background: radial-gradient(circle at 30% 30%, #E8B882, #A0522D);
+    box-shadow: 0 0 25px rgba(232, 184, 130, 0.6);
+    animation: orbit var(--orbit-duration) linear infinite;
+}
+
+.saturn {
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle at 30% 30%, #F4C542, #DAA520);
+    box-shadow: 0 0 22px rgba(244, 197, 66, 0.6);
+    animation: orbit var(--orbit-duration) linear infinite;
+}
+
+.pluto {
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle at 30% 30%, #BDBDBD, #757575);
+    box-shadow: 0 0 15px rgba(189, 189, 189, 0.6);
+    animation: orbit var(--orbit-duration) linear infinite;
+}
+
+/* Smooth floating animation */
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(10px, -10px) scale(1.02);
+    }
+    50% {
+        transform: translate(0, -15px) scale(1);
+    }
+    75% {
+        transform: translate(-10px, -10px) scale(0.98);
+    }
+}
+
+/* Orbital rotation animation */
+@keyframes orbit {
+    from {
+        transform: rotate(0deg) translateX(30px) rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg) translateX(30px) rotate(-180deg);
+    }
+    to {
+        transform: rotate(360deg) translateX(30px) rotate(-360deg);
+    }
+}
+
+/* Sun glow animation */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 60px #ffd700;
+    }
+    50% {
+        box-shadow: 0 0 80px #ffd700;
+    }
+}
+
+/* Remove the old animations */
+.space-object:nth-child(odd),
+.space-object:nth-child(even) {
+    animation-duration: initial;
+} 

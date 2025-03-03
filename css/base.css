@@ -1,0 +1,83 @@
+/* Base styles */
+body {
+    text-align: center;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+h1 {
+    text-shadow: 0 0 10px #fff;
+}
+
+img:not(.main-icon) {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border: 2px solid white;
+    box-shadow: 0 0 10px #fff;
+}
+
+/* Add a wrapper for the main content */
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Background effects */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at center, rgba(25, 25, 35, 0.8) 0%, rgba(0, 0, 0, 1) 100%),
+        linear-gradient(45deg, rgba(38, 0, 64, 0.3), rgba(0, 24, 64, 0.3));
+    z-index: -2;
+    animation: gradientShift 15s ease-in-out infinite;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.08"/></svg>');
+    z-index: -1;
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        transform: scale(1);
+        filter: hue-rotate(0deg);
+    }
+    50% {
+        transform: scale(1.05);
+        filter: hue-rotate(15deg);
+    }
+}
+
+iframe#bgMusic {
+    position: absolute;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    border: 0;
+    pointer-events: none;
+} 

@@ -1,0 +1,6 @@
+/* Main CSS file that imports all components */
+@import 'base.css';
+@import 'components/social-links.css';
+@import 'components/space-objects.css';
+@import 'components/stars.css';
+@import 'components/music-player.css'; 

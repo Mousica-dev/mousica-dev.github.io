@@ -1,0 +1,8 @@
+/* Base space object styles */
+.space-object {
+    position: fixed;
+    border-radius: 50%;
+    z-index: -1;
+    transition: opacity 1.5s ease;
+    will-change: transform;
+} 

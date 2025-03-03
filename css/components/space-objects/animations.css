@@ -1,0 +1,29 @@
+/* Space object animations */
+/* Orbital rotation animation */
+@keyframes orbit {
+    from {
+        transform: rotate(0deg) translateX(30px) rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg) translateX(30px) rotate(-180deg);
+    }
+    to {
+        transform: rotate(360deg) translateX(30px) rotate(-360deg);
+    }
+}
+
+/* Sun glow animation */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 60px #ffd700;
+    }
+    50% {
+        box-shadow: 0 0 80px #ffd700;
+    }
+}
+
+/* Remove the old animations */
+.space-object:nth-child(odd),
+.space-object:nth-child(even) {
+    animation-duration: initial;
+} 

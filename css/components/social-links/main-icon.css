@@ -1,0 +1,14 @@
+/* Main icon styles */
+.main-icon {
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.main-icon:hover {
+    transform: scale(1.02);
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.7));
+} 

@@ -1,0 +1,30 @@
+/* Song info styles */
+.song-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.song-title {
+    font-weight: bold;
+    font-size: 1.2em;
+    text-shadow: 0 0 15px #fff;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+    color: white;
+    transition: text-shadow 0.3s ease;
+}
+
+.song-title:hover {
+    text-shadow: 0 0 20px #fff;
+}
+
+.artist-name {
+    font-size: 0.85em;
+    opacity: 0.9;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+} 
