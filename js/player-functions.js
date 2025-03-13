@@ -26,6 +26,7 @@ function toggleMusic() {
 async function playCurrentSong() {
     if (playerState.isLoading) return;
     playerState.isLoading = true;
+    ui.container.classList.add('loading');
 
     const currentSong = SONGS[playerState.currentSongIndex];
     
@@ -33,7 +34,15 @@ async function playCurrentSong() {
         ui.songInfo.querySelector('.song-title').textContent = 'Loading audio...';
         ui.songInfo.querySelector('.artist-name').textContent = 'Please wait';
         
-        audioPlayer.src = currentSong.file;
+        // Preload the audio
+        await new Promise((resolve, reject) => {
+            audioPlayer.src = currentSong.file;
+            audioPlayer.load(); // Explicitly load the audio
+            
+            audioPlayer.oncanplaythrough = resolve;
+            audioPlayer.onerror = reject;
+        });
+        
         await audioPlayer.play();
         
         ui.songInfo.querySelector('.song-title').textContent = currentSong.title;
@@ -44,10 +53,12 @@ async function playCurrentSong() {
         updatePlaybackUI();
     } catch (error) {
         console.error('Error playing song:', error);
+        // Try next song if current fails
         playerState.currentSongIndex = (playerState.currentSongIndex + 1) % SONGS.length;
         setTimeout(() => playCurrentSong(), 2000);
     } finally {
         playerState.isLoading = false;
+        ui.container.classList.remove('loading');
     }
 }
 
@@ -59,11 +70,20 @@ function initializeAudio() {
     unmuteBanner.textContent = 'Click anywhere for sound';
     document.body.appendChild(unmuteBanner);
 
-    document.addEventListener('click', () => {
-        unmuteBanner.remove();
-        playerState.isAudioInitialized = true;
-        playCurrentSong();
-    }, { once: true });
+    const initializePlayback = async () => {
+        try {
+            unmuteBanner.remove();
+            playerState.isAudioInitialized = true;
+            // Create a temporary audio context to unlock audio
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            await audioContext.resume();
+            await playCurrentSong();
+        } catch (error) {
+            console.error('Audio initialization error:', error);
+        }
+    };
+
+    document.addEventListener('click', initializePlayback, { once: true });
 }
 
 async function checkSpotifyStatus() {

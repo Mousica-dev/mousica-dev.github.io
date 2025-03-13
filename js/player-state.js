@@ -13,4 +13,16 @@ const playerState = {
 const audioPlayer = new Audio();
 audioPlayer.volume = 1.0;
 
+// Add error handling
+audioPlayer.addEventListener('error', (e) => {
+    console.error('Audio player error:', e);
+    console.log('Error code:', audioPlayer.error.code);
+    console.log('Error message:', audioPlayer.error.message);
+});
+
+// Preload metadata when source changes
+audioPlayer.addEventListener('loadedmetadata', () => {
+    console.log('Audio metadata loaded');
+});
+
 export { playerState, audioPlayer }; 
