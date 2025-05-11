@@ -111,15 +111,33 @@ async function checkLastfmStatus() {
                 playerState.isMusicPlaying = true;
             }
         } else {
-            playerState.isLastfmPlaying = false;
+            // No Last.fm status detected, play local music
+            if (playerState.isLastfmPlaying) {
+                playerState.isLastfmPlaying = false;
+                audioPlayer.pause();
+                audioPlayer.loop = false;
+            }
+            
             if (!playerState.isAudioInitialized) {
                 initializeAudio();
+            } else if (!playerState.isMusicPlaying) {
+                // If audio is initialized but not playing, start playing local music
+                playCurrentSong();
             }
         }
     } catch (error) {
         console.error('Error checking Last.fm status:', error);
+        // On error, fall back to local music
+        if (playerState.isLastfmPlaying) {
+            playerState.isLastfmPlaying = false;
+            audioPlayer.pause();
+            audioPlayer.loop = false;
+        }
+        
         if (!playerState.isAudioInitialized) {
             initializeAudio();
+        } else if (!playerState.isMusicPlaying) {
+            playCurrentSong();
         }
     }
 }
