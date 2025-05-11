@@ -1,5 +1,5 @@
 // Player functions
-import { SONGS, AUDIO_PATHS, SPOTIFY_API_URL, INITIAL_CHECK_INTERVAL, NORMAL_CHECK_INTERVAL } from './constants.js';
+import { SONGS, AUDIO_PATHS, LASTFM_API_URL, INITIAL_CHECK_INTERVAL, NORMAL_CHECK_INTERVAL } from './constants.js';
 import { playerState, audioPlayer } from './player-state.js';
 import { ui } from './main.js';
 
@@ -11,7 +11,7 @@ function updatePlaybackUI() {
 }
 
 function toggleMusic() {
-    if (playerState.isSpotifyPlaying) return;
+    if (playerState.isLastfmPlaying) return;
     
     if (playerState.isMusicPlaying) {
         audioPlayer.pause();
@@ -86,9 +86,9 @@ function initializeAudio() {
     document.addEventListener('click', initializePlayback, { once: true });
 }
 
-async function checkSpotifyStatus() {
+async function checkLastfmStatus() {
     try {
-        const response = await fetch(SPOTIFY_API_URL);
+        const response = await fetch(LASTFM_API_URL);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         
         const data = await response.json();
@@ -103,34 +103,34 @@ async function checkSpotifyStatus() {
             ui.songInfo.querySelector('.song-title').textContent = track.name;
             ui.songInfo.querySelector('.artist-name').textContent = track.artist['#text'];
             
-            if (!playerState.isSpotifyPlaying) {
-                audioPlayer.src = AUDIO_PATHS.SPOTIFY_DETECT;
+            if (!playerState.isLastfmPlaying) {
+                audioPlayer.src = AUDIO_PATHS.LASTFM_DETECT;
                 audioPlayer.loop = true;
                 await audioPlayer.play();
-                playerState.isSpotifyPlaying = true;
+                playerState.isLastfmPlaying = true;
                 playerState.isMusicPlaying = true;
             }
         } else {
-            playerState.isSpotifyPlaying = false;
+            playerState.isLastfmPlaying = false;
             if (!playerState.isAudioInitialized) {
                 initializeAudio();
             }
         }
     } catch (error) {
-        console.error('Error checking Spotify status:', error);
+        console.error('Error checking Last.fm status:', error);
         if (!playerState.isAudioInitialized) {
             initializeAudio();
         }
     }
 }
 
-// Initialize Spotify checking
-function initializeSpotifyChecking() {
-    checkSpotifyStatus();
-    const initialChecks = setInterval(checkSpotifyStatus, INITIAL_CHECK_INTERVAL);
+// Initialize Last.fm checking
+function initializeLastfmChecking() {
+    checkLastfmStatus();
+    const initialChecks = setInterval(checkLastfmStatus, INITIAL_CHECK_INTERVAL);
     setTimeout(() => {
         clearInterval(initialChecks);
-        setInterval(checkSpotifyStatus, NORMAL_CHECK_INTERVAL);
+        setInterval(checkLastfmStatus, NORMAL_CHECK_INTERVAL);
     }, 30000);
 }
 
@@ -139,6 +139,6 @@ export {
     toggleMusic, 
     playCurrentSong, 
     initializeAudio, 
-    checkSpotifyStatus,
-    initializeSpotifyChecking
+    checkLastfmStatus,
+    initializeLastfmChecking
 }; 

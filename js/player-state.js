@@ -5,7 +5,7 @@ const playerState = {
     currentSongIndex: Math.floor(Math.random() * SONGS.length),
     isAudioInitialized: false,
     isMusicPlaying: false,
-    isSpotifyPlaying: false,
+    isLastfmPlaying: false,
     isLoading: false
 };
 

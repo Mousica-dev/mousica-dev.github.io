@@ -13,7 +13,7 @@ function createPlayerUI() {
     const songInfo = document.createElement('div');
     songInfo.className = 'song-info';
     songInfo.innerHTML = `
-        <div class="song-title">Checking Spotify...</div>
+        <div class="song-title">Checking Last.fm...</div>
         <div class="artist-name">via Last.fm</div>
     `;
 
